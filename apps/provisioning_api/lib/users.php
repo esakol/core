@@ -67,8 +67,27 @@ class Users {
 		$search = !empty($_GET['search']) ? $_GET['search'] : '';
 		$limit = !empty($_GET['limit']) ? $_GET['limit'] : null;
 		$offset = !empty($_GET['offset']) ? $_GET['offset'] : null;
+		
+		$user = $this->userSession->getUser();
 
-		$users = $this->userManager->search($search, $limit, $offset);
+		if($this->groupManager->isAdmin($user->getUID())){
+			$users = $this->userManager->search($search, $limit, $offset);
+		} 
+		elseif(OC_SubAdmin::isSubAdmin($user->getUID())) {
+			$subAdminOfGroups = \OC_SubAdmin::getSubAdminsGroups($user->getUID());
+
+			$batch = [];			
+
+			foreach($subAdminOfGroups as $group) {
+				$groupUsers = $this->groupManager->displayNamesInGroup($group, null, $limit, $offset);
+				foreach($groupUsers as $uid => $displayName) {
+					$batch[$uid] = $displayName;
+				}
+			}
+			asort($batch);
+			$users = $batch;
+			
+		}
 		$users = array_keys($users);
 
 		return new OC_OCS_Result([
