@@ -25,6 +25,7 @@ use \OCP\IConfig;
 use \OCP\IL10N;
 
 use \OCA\Files_External\Lib\Backend\Backend;
+use \OCA\Files_External\Lib\Auth\AuthMechanism;
 
 /**
  * Service class to manage backend definitions
@@ -56,6 +57,9 @@ class BackendService {
 
 	/** @var Backend[] */
 	private $backends = [];
+
+	/** @var AuthMechanism[] */
+	private $authMechanisms = [];
 
 	/**
 	 * @param IConfig $config
@@ -95,6 +99,26 @@ class BackendService {
 	public function registerBackends(array $backends) {
 		foreach ($backends as $backend) {
 			$this->registerBackend($backend);
+		}
+	}
+	/**
+	 * Register an authentication mechanism
+	 *
+	 * @param AuthMechanism $authMech
+	 */
+	public function registerAuthMechanism(AuthMechanism $authMech) {
+		if (!$this->isAllowedAuthMechanism($authMech)) {
+			$authMech->removeVisibility(BackendService::VISIBILITY_PERSONAL);
+		}
+		$this->authMechanisms[$authMech->getClass()] = $authMech;
+	}
+
+	/**
+	 * @param AuthMechanism[] $mechanisms
+	 */
+	public function registerAuthMechanisms(array $mechanisms) {
+		foreach ($mechanisms as $mechanism) {
+			$this->registerAuthMechanism($mechanism);
 		}
 	}
 
@@ -154,6 +178,63 @@ class BackendService {
 	}
 
 	/**
+	 * Get all authentication mechanisms
+	 *
+	 * @return AuthMechanism[]
+	 */
+	public function getAuthMechanisms() {
+		return $this->authMechanisms;
+	}
+
+	/**
+	 * Get all authentication mechanisms for schemes
+	 *
+	 * @param string[] $schemes
+	 * @return AuthMechanism[]
+	 */
+	public function getAuthMechanismsByScheme(array $schemes) {
+		return array_filter($this->getAuthMechanisms(), function($authMech) use ($schemes) {
+			return in_array($authMech->getScheme(), $schemes, true);
+		});
+	}
+
+	/**
+	 * Get authentication mechanisms visible for $visibleFor
+	 *
+	 * @param int $visibleFor
+	 * @return AuthMechanism[]
+	 */
+	public function getAuthMechanismsVisibleFor($visibleFor) {
+		return array_filter($this->getAuthMechanisms(), function($authMechanism) use ($visibleFor) {
+			return $authMechanism->isVisibleFor($visibleFor);
+		});
+	}
+
+	/**
+	 * Get authentication mechanisms allowed to be visible for $visibleFor
+	 *
+	 * @param int $visibleFor
+	 * @return AuthMechanism[]
+	 */
+	public function getAuthMechanismsAllowedVisibleFor($visibleFor) {
+		return array_filter($this->getAuthMechanisms(), function($authMechanism) use ($visibleFor) {
+			return $authMechanism->isAllowedVisibleFor($visibleFor);
+		});
+	}
+
+
+	/**
+	 * @param string $class
+	 * @return AuthMechanism|null
+	 */
+	public function getAuthMechanism($class) {
+		if (isset($this->authMechanisms[$class])) {
+			return $this->authMechanisms[$class];
+		}
+		return null;
+	}
+
+	/**
 	 * @return bool
 	 */
 	public function isUserMountingAllowed() {
@@ -173,5 +254,15 @@ class BackendService {
 			return true;
 		}
 		return false;
+	}
+
+	/**
+	 * Check an authentication mechanism if a user is allowed to use it
+	 *
+	 * @param AuthMechanism $authMechanism
+	 * @return bool
+	 */
+	protected function isAllowedAuthMechanism(AuthMechanism $authMechanism) {
+		return true; // not implemented
 	}
 }
