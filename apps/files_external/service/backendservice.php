@@ -22,7 +22,6 @@
 namespace OCA\Files_External\Service;
 
 use \OCP\IConfig;
-use \OCP\IL10N;
 
 use \OCA\Files_External\Lib\Backend\Backend;
 use \OCA\Files_External\Lib\Auth\AuthMechanism;
@@ -46,9 +45,6 @@ class BackendService {
 	/** @var IConfig */
 	protected $config;
 
-	/** @var IL10N */
-	protected $l10n;
-
 	/** @var bool */
 	private $userMountingAllowed = true;
 
@@ -63,14 +59,11 @@ class BackendService {
 
 	/**
 	 * @param IConfig $config
-	 * @param IL10N $l10n
 	 */
 	public function __construct(
-		IConfig $config,
-		IL10N $l10n
+		IConfig $config
 	) {
 		$this->config = $config;
-		$this->l10n = $l10n;
 
 		// Load config values
 		if ($this->config->getAppValue('files_external', 'allow_user_mounting', 'yes') !== 'yes') {
