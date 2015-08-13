@@ -53,6 +53,7 @@ class RequestTest extends \Test\TestCase {
 		$request = new Request(
 			$vars,
 			$this->secureRandom,
+			$this->getMock('\OCP\Security\ICrypto'),
 			$this->config,
 			$this->stream
 		);
@@ -85,6 +86,7 @@ class RequestTest extends \Test\TestCase {
 		$request = new Request(
 			$vars,
 			$this->secureRandom,
+			$this->getMock('\OCP\Security\ICrypto'),
 			$this->config,
 			$this->stream
 		);
@@ -96,8 +98,8 @@ class RequestTest extends \Test\TestCase {
 
 
 	/**
-	* @expectedException \RuntimeException
-	*/
+	 * @expectedException \RuntimeException
+	 */
 	public function testImmutableArrayAccess() {
 		$vars = array(
 			'get' => array('name' => 'John Q. Public', 'nickname' => 'Joey'),
@@ -107,6 +109,7 @@ class RequestTest extends \Test\TestCase {
 		$request = new Request(
 			$vars,
 			$this->secureRandom,
+			$this->getMock('\OCP\Security\ICrypto'),
 			$this->config,
 			$this->stream
 		);
@@ -115,8 +118,8 @@ class RequestTest extends \Test\TestCase {
 	}
 
 	/**
-	* @expectedException \RuntimeException
-	*/
+	 * @expectedException \RuntimeException
+	 */
 	public function testImmutableMagicAccess() {
 		$vars = array(
 			'get' => array('name' => 'John Q. Public', 'nickname' => 'Joey'),
@@ -126,6 +129,7 @@ class RequestTest extends \Test\TestCase {
 		$request = new Request(
 			$vars,
 			$this->secureRandom,
+			$this->getMock('\OCP\Security\ICrypto'),
 			$this->config,
 			$this->stream
 		);
@@ -134,8 +138,8 @@ class RequestTest extends \Test\TestCase {
 	}
 
 	/**
-	* @expectedException \LogicException
-	*/
+	 * @expectedException \LogicException
+	 */
 	public function testGetTheMethodRight() {
 		$vars = array(
 			'get' => array('name' => 'John Q. Public', 'nickname' => 'Joey'),
@@ -145,6 +149,7 @@ class RequestTest extends \Test\TestCase {
 		$request = new Request(
 			$vars,
 			$this->secureRandom,
+			$this->getMock('\OCP\Security\ICrypto'),
 			$this->config,
 			$this->stream
 		);
@@ -161,6 +166,7 @@ class RequestTest extends \Test\TestCase {
 		$request = new Request(
 			$vars,
 			$this->secureRandom,
+			$this->getMock('\OCP\Security\ICrypto'),
 			$this->config,
 			$this->stream
 		);
@@ -182,6 +188,7 @@ class RequestTest extends \Test\TestCase {
 		$request = new Request(
 			$vars,
 			$this->secureRandom,
+			$this->getMock('\OCP\Security\ICrypto'),
 			$this->config,
 			$this->stream
 		);
@@ -206,6 +213,7 @@ class RequestTest extends \Test\TestCase {
 		$request = new Request(
 			$vars,
 			$this->secureRandom,
+			$this->getMock('\OCP\Security\ICrypto'),
 			$this->config,
 			$this->stream
 		);
@@ -230,6 +238,7 @@ class RequestTest extends \Test\TestCase {
 		$request = new Request(
 			$vars,
 			$this->secureRandom,
+			$this->getMock('\OCP\Security\ICrypto'),
 			$this->config,
 			$this->stream
 		);
@@ -250,6 +259,7 @@ class RequestTest extends \Test\TestCase {
 		$request = new Request(
 			$vars,
 			$this->secureRandom,
+			$this->getMock('\OCP\Security\ICrypto'),
 			$this->config,
 			$this->stream
 		);
@@ -274,6 +284,7 @@ class RequestTest extends \Test\TestCase {
 		$request = new Request(
 			$vars,
 			$this->secureRandom,
+			$this->getMock('\OCP\Security\ICrypto'),
 			$this->config,
 			$this->stream
 		);
@@ -303,6 +314,7 @@ class RequestTest extends \Test\TestCase {
 		$request = new Request(
 			$vars,
 			$this->secureRandom,
+			$this->getMock('\OCP\Security\ICrypto'),
 			$this->config,
 			$this->stream
 		);
@@ -324,6 +336,7 @@ class RequestTest extends \Test\TestCase {
 		$request = new Request(
 			$vars,
 			$this->secureRandom,
+			$this->getMock('\OCP\Security\ICrypto'),
 			$this->config,
 			$this->stream
 		);
@@ -347,6 +360,7 @@ class RequestTest extends \Test\TestCase {
 		$request = new Request(
 			[],
 			$this->secureRandom,
+			$this->getMock('\OCP\Security\ICrypto'),
 			$this->config,
 			$this->stream
 		);
@@ -358,6 +372,7 @@ class RequestTest extends \Test\TestCase {
 		$request = new Request(
 			[],
 			\OC::$server->getSecureRandom(),
+			$this->getMock('\OCP\Security\ICrypto'),
 			$this->config,
 			$this->stream
 		);
@@ -382,6 +397,7 @@ class RequestTest extends \Test\TestCase {
 				],
 			],
 			$this->secureRandom,
+			$this->getMock('\OCP\Security\ICrypto'),
 			$this->config,
 			$this->stream
 		);
@@ -410,6 +426,7 @@ class RequestTest extends \Test\TestCase {
 				],
 			],
 			$this->secureRandom,
+			$this->getMock('\OCP\Security\ICrypto'),
 			$this->config,
 			$this->stream
 		);
@@ -438,6 +455,7 @@ class RequestTest extends \Test\TestCase {
 				],
 			],
 			$this->secureRandom,
+			$this->getMock('\OCP\Security\ICrypto'),
 			$this->config,
 			$this->stream
 		);
@@ -470,6 +488,7 @@ class RequestTest extends \Test\TestCase {
 				],
 			],
 			$this->secureRandom,
+			$this->getMock('\OCP\Security\ICrypto'),
 			$this->config,
 			$this->stream
 		);
@@ -497,6 +516,7 @@ class RequestTest extends \Test\TestCase {
 		$request = new Request(
 			[],
 			$this->secureRandom,
+			$this->getMock('\OCP\Security\ICrypto'),
 			$this->config,
 			$this->stream
 		);
@@ -506,10 +526,10 @@ class RequestTest extends \Test\TestCase {
 
 	public function testGetServerProtocolWithProtoValid() {
 		$this->config
-				->expects($this->exactly(2))
-				->method('getSystemValue')
-				->with('overwriteprotocol')
-				->will($this->returnValue(''));
+			->expects($this->exactly(2))
+			->method('getSystemValue')
+			->with('overwriteprotocol')
+			->will($this->returnValue(''));
 
 		$requestHttps = new Request(
 			[
@@ -518,6 +538,7 @@ class RequestTest extends \Test\TestCase {
 				],
 			],
 			$this->secureRandom,
+			$this->getMock('\OCP\Security\ICrypto'),
 			$this->config,
 			$this->stream
 		);
@@ -528,6 +549,7 @@ class RequestTest extends \Test\TestCase {
 				],
 			],
 			$this->secureRandom,
+			$this->getMock('\OCP\Security\ICrypto'),
 			$this->config,
 			$this->stream
 		);
@@ -551,6 +573,7 @@ class RequestTest extends \Test\TestCase {
 				],
 			],
 			$this->secureRandom,
+			$this->getMock('\OCP\Security\ICrypto'),
 			$this->config,
 			$this->stream
 		);
@@ -571,6 +594,7 @@ class RequestTest extends \Test\TestCase {
 				],
 			],
 			$this->secureRandom,
+			$this->getMock('\OCP\Security\ICrypto'),
 			$this->config,
 			$this->stream
 		);
@@ -587,6 +611,7 @@ class RequestTest extends \Test\TestCase {
 		$request = new Request(
 			[],
 			$this->secureRandom,
+			$this->getMock('\OCP\Security\ICrypto'),
 			$this->config,
 			$this->stream
 		);
@@ -607,6 +632,7 @@ class RequestTest extends \Test\TestCase {
 				],
 			],
 			$this->secureRandom,
+			$this->getMock('\OCP\Security\ICrypto'),
 			$this->config,
 			$this->stream
 		);
@@ -628,6 +654,7 @@ class RequestTest extends \Test\TestCase {
 				]
 			],
 			$this->secureRandom,
+			$this->getMock('\OCP\Security\ICrypto'),
 			$this->config,
 			$this->stream
 		);
@@ -716,6 +743,7 @@ class RequestTest extends \Test\TestCase {
 				]
 			],
 			$this->secureRandom,
+			$this->getMock('\OCP\Security\ICrypto'),
 			$this->config,
 			$this->stream
 		);
@@ -732,6 +760,7 @@ class RequestTest extends \Test\TestCase {
 				]
 			],
 			$this->secureRandom,
+			$this->getMock('\OCP\Security\ICrypto'),
 			$this->config,
 			$this->stream
 		);
@@ -749,6 +778,7 @@ class RequestTest extends \Test\TestCase {
 				]
 			],
 			$this->secureRandom,
+			$this->getMock('\OCP\Security\ICrypto'),
 			$this->config,
 			$this->stream
 		);
@@ -766,6 +796,7 @@ class RequestTest extends \Test\TestCase {
 				]
 			],
 			$this->secureRandom,
+			$this->getMock('\OCP\Security\ICrypto'),
 			$this->config,
 			$this->stream
 		);
@@ -793,6 +824,7 @@ class RequestTest extends \Test\TestCase {
 		$request = new Request(
 			[],
 			$this->secureRandom,
+			$this->getMock('\OCP\Security\ICrypto'),
 			$this->config,
 			$this->stream
 		);
@@ -814,6 +846,7 @@ class RequestTest extends \Test\TestCase {
 				],
 			],
 			$this->secureRandom,
+			$this->getMock('\OCP\Security\ICrypto'),
 			$this->config,
 			$this->stream
 		);
@@ -840,6 +873,7 @@ class RequestTest extends \Test\TestCase {
 				],
 			],
 			$this->secureRandom,
+			$this->getMock('\OCP\Security\ICrypto'),
 			$this->config,
 			$this->stream
 		);
@@ -866,6 +900,7 @@ class RequestTest extends \Test\TestCase {
 				],
 			],
 			$this->secureRandom,
+			$this->getMock('\OCP\Security\ICrypto'),
 			$this->config,
 			$this->stream
 		);
@@ -882,6 +917,7 @@ class RequestTest extends \Test\TestCase {
 		$request = new Request(
 			[],
 			$this->secureRandom,
+			$this->getMock('\OCP\Security\ICrypto'),
 			$this->config,
 			$this->stream
 		);
@@ -909,6 +945,7 @@ class RequestTest extends \Test\TestCase {
 		$request = new Request(
 			[],
 			$this->secureRandom,
+			$this->getMock('\OCP\Security\ICrypto'),
 			$this->config,
 			$this->stream
 		);
@@ -924,6 +961,7 @@ class RequestTest extends \Test\TestCase {
 				]
 			],
 			$this->secureRandom,
+			$this->getMock('\OCP\Security\ICrypto'),
 			$this->config,
 			$this->stream
 		);
@@ -944,6 +982,7 @@ class RequestTest extends \Test\TestCase {
 				]
 			],
 			$this->secureRandom,
+			$this->getMock('\OCP\Security\ICrypto'),
 			$this->config,
 			$this->stream
 		);
@@ -964,6 +1003,7 @@ class RequestTest extends \Test\TestCase {
 				]
 			],
 			$this->secureRandom,
+			$this->getMock('\OCP\Security\ICrypto'),
 			$this->config,
 			$this->stream
 		);
@@ -986,6 +1026,7 @@ class RequestTest extends \Test\TestCase {
 				]
 			],
 			$this->secureRandom,
+			$this->getMock('\OCP\Security\ICrypto'),
 			$this->config,
 			$this->stream
 		);
@@ -1008,6 +1049,7 @@ class RequestTest extends \Test\TestCase {
 				]
 			],
 			$this->secureRandom,
+			$this->getMock('\OCP\Security\ICrypto'),
 			$this->config,
 			$this->stream
 		);
@@ -1030,6 +1072,7 @@ class RequestTest extends \Test\TestCase {
 				]
 			],
 			$this->secureRandom,
+			$this->getMock('\OCP\Security\ICrypto'),
 			$this->config,
 			$this->stream
 		);
@@ -1052,6 +1095,7 @@ class RequestTest extends \Test\TestCase {
 				]
 			],
 			$this->secureRandom,
+			$this->getMock('\OCP\Security\ICrypto'),
 			$this->config,
 			$this->stream
 		);
@@ -1105,6 +1149,7 @@ class RequestTest extends \Test\TestCase {
 				]
 			],
 			$this->secureRandom,
+			$this->getMock('\OCP\Security\ICrypto'),
 			$this->config,
 			$this->stream
 		);
@@ -1144,6 +1189,7 @@ class RequestTest extends \Test\TestCase {
 					]
 				],
 				$this->secureRandom,
+				$this->getMock('\OCP\Security\ICrypto'),
 				$this->config,
 				$this->stream
 			])
@@ -1157,17 +1203,25 @@ class RequestTest extends \Test\TestCase {
 	}
 
 	public function testPassesCSRFCheckWithGet() {
+		$crypto = $this->getMock('\OCP\Security\ICrypto');
+		$crypto
+			->expects($this->once())
+			->method('decrypt')
+			->with('1c637c4147e40a8a8f09428ec2059cebea3480c27b402b4e793c69710a731513|wlXxNUaFqHuQnZr5|e6ab49c9e0e20c8d3607e02f1d8e6ec17ad6020ae10b7d64ab4b0a6318c0875940943a6aa303dc090fea0b4cd5b9fb8bcbecac4308a2bd15d9f369cdc22121a4', 'secret')
+			->will($this->returnValue('MyStoredRequestToken'));
+
 		/** @var Request $request */
 		$request = $this->getMockBuilder('\OC\AppFramework\Http\Request')
 			->setMethods(['getScriptName'])
 			->setConstructorArgs([
 				[
 					'get' => [
-						'requesttoken' => 'MyStoredRequestToken',
+						'requesttoken' => '1c637c4147e40a8a8f09428ec2059cebea3480c27b402b4e793c69710a731513|wlXxNUaFqHuQnZr5|e6ab49c9e0e20c8d3607e02f1d8e6ec17ad6020ae10b7d64ab4b0a6318c0875940943a6aa303dc090fea0b4cd5b9fb8bcbecac4308a2bd15d9f369cdc22121a4:secret',
 					],
 					'requesttoken' => 'MyStoredRequestToken',
 				],
 				$this->secureRandom,
+				$crypto,
 				$this->config,
 				$this->stream
 			])
@@ -1177,17 +1231,25 @@ class RequestTest extends \Test\TestCase {
 	}
 
 	public function testPassesCSRFCheckWithPost() {
+		$crypto = $this->getMock('\OCP\Security\ICrypto');
+		$crypto
+			->expects($this->once())
+			->method('decrypt')
+			->with('1c637c4147e40a8a8f09428ec2059cebea3480c27b402b4e793c69710a731513|wlXxNUaFqHuQnZr5|e6ab49c9e0e20c8d3607e02f1d8e6ec17ad6020ae10b7d64ab4b0a6318c0875940943a6aa303dc090fea0b4cd5b9fb8bcbecac4308a2bd15d9f369cdc22121a4', 'secret')
+			->will($this->returnValue('MyStoredRequestToken'));
+
 		/** @var Request $request */
 		$request = $this->getMockBuilder('\OC\AppFramework\Http\Request')
 			->setMethods(['getScriptName'])
 			->setConstructorArgs([
 				[
 					'post' => [
-						'requesttoken' => 'MyStoredRequestToken',
+						'requesttoken' => '1c637c4147e40a8a8f09428ec2059cebea3480c27b402b4e793c69710a731513|wlXxNUaFqHuQnZr5|e6ab49c9e0e20c8d3607e02f1d8e6ec17ad6020ae10b7d64ab4b0a6318c0875940943a6aa303dc090fea0b4cd5b9fb8bcbecac4308a2bd15d9f369cdc22121a4:secret',
 					],
 					'requesttoken' => 'MyStoredRequestToken',
 				],
 				$this->secureRandom,
+				$crypto,
 				$this->config,
 				$this->stream
 			])
@@ -1197,17 +1259,24 @@ class RequestTest extends \Test\TestCase {
 	}
 
 	public function testPassesCSRFCheckWithHeader() {
+		$crypto = $this->getMock('\OCP\Security\ICrypto');
+		$crypto
+			->expects($this->once())
+			->method('decrypt')
+			->with('1c637c4147e40a8a8f09428ec2059cebea3480c27b402b4e793c69710a731513|wlXxNUaFqHuQnZr5|e6ab49c9e0e20c8d3607e02f1d8e6ec17ad6020ae10b7d64ab4b0a6318c0875940943a6aa303dc090fea0b4cd5b9fb8bcbecac4308a2bd15d9f369cdc22121a4', 'secret')
+			->will($this->returnValue('MyStoredRequestToken'));
 		/** @var Request $request */
 		$request = $this->getMockBuilder('\OC\AppFramework\Http\Request')
 			->setMethods(['getScriptName'])
 			->setConstructorArgs([
 				[
 					'server' => [
-						'HTTP_REQUESTTOKEN' => 'MyStoredRequestToken',
+						'HTTP_REQUESTTOKEN' => '1c637c4147e40a8a8f09428ec2059cebea3480c27b402b4e793c69710a731513|wlXxNUaFqHuQnZr5|e6ab49c9e0e20c8d3607e02f1d8e6ec17ad6020ae10b7d64ab4b0a6318c0875940943a6aa303dc090fea0b4cd5b9fb8bcbecac4308a2bd15d9f369cdc22121a4:secret',
 					],
 					'requesttoken' => 'MyStoredRequestToken',
 				],
 				$this->secureRandom,
+				$crypto,
 				$this->config,
 				$this->stream
 			])
@@ -1228,6 +1297,7 @@ class RequestTest extends \Test\TestCase {
 					'requesttoken' => 'MyStoredRequestToken',
 				],
 				$this->secureRandom,
+				$this->getMock('\OCP\Security\ICrypto'),
 				$this->config,
 				$this->stream
 			])
@@ -1243,6 +1313,7 @@ class RequestTest extends \Test\TestCase {
 			->setConstructorArgs([
 				[],
 				$this->secureRandom,
+				$this->getMock('\OCP\Security\ICrypto'),
 				$this->config,
 				$this->stream
 			])
